@@ -1,12 +1,13 @@
 package com.socialnetwork.userservice.models;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-@AllArgsConstructor
+@Data
 public class User {
     @Id
     private int id;
