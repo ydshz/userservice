@@ -37,4 +37,8 @@ public class UserService {
         user.setPassword(userCreate.getPassword());
         userRepository.save(user);
     }
+    public boolean verifyPassword(String username, String password){
+        User user = getUserByName(username);
+        return user.getPassword().equals(password);
+    }
 }
