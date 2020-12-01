@@ -22,4 +22,11 @@ public class UserController {
     }
     @RequestMapping("/{username}")
     public User userByName(@PathVariable String username){ return userService.getUserByName(username); }
+    @RequestMapping(value = "/{username}", method=RequestMethod.DELETE)
+    public void deleteUser(@PathVariable String username){  userService.deleteUser(userService.getUserByName(username)); }
+    @RequestMapping(value = "/{username}", method = RequestMethod.PUT)
+    public void updateUser(@PathVariable String username, @RequestBody UserCreate userCreate){
+        User user = userService.getUserByName(username);
+        userService.updateUser(user, userCreate);
+    }
 }
