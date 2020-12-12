@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  userservice:
+    build:
+      context: .
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.etherpad.rule=Host(`localhost`)"
+      - "traefik.http.routers.etherpad.rule=Path(`/user`)"
+      - "traefik.http.routers.etherpad.entrypoints=web"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.services.etherpad.loadbalancer.server.port=8080"
+    networks:
+      - proxy
+      - backend
+  userservice-postgres:
+    image: postgres:alpine
+    environment:
+      -  POSTGRES_PASSWORD=password
+    networks:
+      - backend
+
+
+networks:
+  proxy:
+    external: true
+  backend:
+    external: true
